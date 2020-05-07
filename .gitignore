@@ -1,4 +1,5 @@
 /venv
+/posts/*
 /.vscode
 *.pyc
 config.py

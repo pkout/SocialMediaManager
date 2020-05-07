@@ -11,6 +11,7 @@ class Instagram:
 
     def __init__(self, driver):
         self._driver = driver
+        self._posted_count = 0
 
     def login(self, username, password):
         self._driver.get('https://www.instagram.com/accounts/login/')
@@ -24,8 +25,15 @@ class Instagram:
         button_submit.click()
 
     def skip_initial_popups(self):
+        # button_not_now = WebDriverWait(self._driver, 10).until(
+        #     lambda x:
+        #         EC.presence_of_element_located((By.XPATH, '//button[text()="Not Now"]')) or
+        #         EC.presence_of_element_located((By.XPATH, '//button[text()="Cancel"]'))
+        # )
         button_not_now = WebDriverWait(self._driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, '//button[text()="Not Now"]'))
+            lambda x:
+                x.find_element_by_xpath('//button[text()="Not Now"]') or
+                x.find_element_by_xpath('//button[text()="Cancel"]')
         )
         button_not_now.click()
 
@@ -63,3 +71,18 @@ class Instagram:
 
         button_share = self._driver.find_element_by_xpath('//button[text()="Share"]')
         button_share.click()
+
+        self._posted_count += 1
+
+        # button_not_now = WebDriverWait(self._driver, 10).until(
+        #     lambda x:
+        #         x.find_element_by_xpath('//button[text()="Not Now"]') or
+        #         x.find_element_by_css_selector('svg[aria-label="New Post"]')
+        # )
+        if self._posted_count == 1:
+            button_not_now = WebDriverWait(self._driver, 10).until(
+                # lambda x: x.find_element_by_xpath('//button[text()="Not Now"] | //svg[@aria-label="New Post"]')
+                lambda x: x.find_element_by_xpath('//button[text()="Not Now"]')
+            )
+            if button_not_now.text == 'Not Now':
+                button_not_now.click()
