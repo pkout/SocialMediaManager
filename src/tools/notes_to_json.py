@@ -19,7 +19,7 @@ for card in cards:
     image_tag = card.find('img')
     tags = [f'#{t.strip()}' for t in card.find('span', class_='tags').get_text().split(',')]
     image_url = image_tag['src'] if image_tag is not None else None
-    if image_url == '/learning/virology/images/helical-symmetry.jpg':
+    if image_url == CONFIG['skip_cards_until_image_path']:
         skip = False
     if not skip:
         cards_json.append({
