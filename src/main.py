@@ -35,11 +35,18 @@ chrome_options = Options()
 chrome_options.add_experimental_option('mobileEmulation', mobile_emulation)
 driver = webdriver.Chrome(options = chrome_options)
 
+# user_agent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16"
+# profile = webdriver.FirefoxProfile() 
+# profile.set_preference("general.useragent.override", user_agent)
+# driver = webdriver.Firefox(profile)
+# driver.set_window_size(360,640)
+
 try: 
     instagram = Instagram(driver=driver)
 
     instagram.login(CONFIG['instagram']['username'], CONFIG['instagram']['password'])
     instagram.skip_initial_popups()
+    instagram.post('/home/petr/projects/petrkout.com/scripts/card.png', 'test')
     for i in range(len(posts)):
         print(f'Posting {posts[i]}')
         print(f'Image {images_paths[i]}')
