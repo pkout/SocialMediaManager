@@ -1,6 +1,6 @@
 import time
 
-# import autoit
+import autoit
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -32,7 +32,7 @@ class Instagram:
         # )
         button_not_now = WebDriverWait(self._driver, 50).until(
             lambda x:
-                x.find_element_by_xpath('//a[text()="Not Now"]') or
+                x.find_element_by_xpath('//button[text()="Not Now"]') or
                 x.find_element_by_xpath('//button[text()="Cancel"]')
         )
         button_not_now.click()
@@ -50,9 +50,9 @@ class Instagram:
             self._driver.find_element_by_css_selector('svg[aria-label="New Post"]')
         ).click().perform()
         handle = "[CLASS:#32770; TITLE:Open]"
-        # autoit.win_wait(handle, 60)
-        # autoit.control_set_text(handle, "Edit1", image_path)
-        # autoit.control_click(handle, "Button1")
+        autoit.win_wait(handle, 60)
+        autoit.control_set_text(handle, "Edit1", image_path)
+        autoit.control_click(handle, "Button1")
 
         button_expand = WebDriverWait(self._driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//span[text()="Expand"]'))

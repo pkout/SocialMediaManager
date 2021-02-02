@@ -3,4 +3,5 @@
 /.vscode
 *.pyc
 *.log
+card.png
 config.py

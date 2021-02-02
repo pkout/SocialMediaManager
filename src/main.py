@@ -23,7 +23,7 @@ def _load_posts():
     
     return posts, images_paths
 
-posts, images_paths = _load_posts()
+# posts, images_paths = _load_posts()
 
 mobile_emulation = {
     'deviceMetrics': {'width': 360, 'height': 640, 'pixelRatio': 3.0},
@@ -46,7 +46,7 @@ try:
 
     instagram.login(CONFIG['instagram']['username'], CONFIG['instagram']['password'])
     instagram.skip_initial_popups()
-    instagram.post('/home/petr/projects/petrkout.com/scripts/card.png', 'test')
+    instagram.post(str(Path(PROJ_DIR, 'card.png')), 'test')
     for i in range(len(posts)):
         print(f'Posting {posts[i]}')
         print(f'Image {images_paths[i]}')
