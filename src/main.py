@@ -1,4 +1,6 @@
 import json
+import urllib.request
+
 import os
 import time
 from pathlib import Path
@@ -42,14 +44,18 @@ driver = webdriver.Chrome(options = chrome_options)
 # driver.set_window_size(360,640)
 
 try: 
+    url = 'https://petrkout.com/learn/card.png'
+    urllib.request.urlretrieve(url, PROJ_DIR / 'card.png')
+    url = 'https://petrkout.com/learn/card.json'
+    urllib.request.urlretrieve(url, PROJ_DIR / 'card.json')
+    with open(Path(PROJ_DIR / 'card.json'), 'r') as f:
+        tags_list = json.load(f)['tags']
+        tags_list_single_words = [tag.replace(' ', '_').replace('\'', '') for tag in tags_list]
+        tags_str = '#' + ' #'.join(tags_list_single_words)
     instagram = Instagram(driver=driver)
-
     instagram.login(CONFIG['instagram']['username'], CONFIG['instagram']['password'])
     instagram.skip_initial_popups()
-    instagram.post(str(Path(PROJ_DIR, 'card.png')), 'test')
-    for i in range(len(posts)):
-        print(f'Posting {posts[i]}')
-        print(f'Image {images_paths[i]}')
-        instagram.post(str(images_paths[i]), ', '.join(posts[i]['tags']))
+    instagram.post(str(Path(PROJ_DIR / 'card.png')), tags_str)
+    # instagram.post(str(images_paths[i]), ', '.join(posts[i]['tags']))
 finally:
     driver.quit()

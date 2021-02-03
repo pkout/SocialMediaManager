@@ -3,5 +3,6 @@
 /.vscode
 *.pyc
 *.log
+card.json
 card.png
 config.py
