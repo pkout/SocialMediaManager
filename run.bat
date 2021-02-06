@@ -1,2 +1,2 @@
 set PYTHONPATH=src
-python src/main.py
+C:\Users\Petr\Projects\SocialMediaManager\venv\Scripts\python.exe src/main.py

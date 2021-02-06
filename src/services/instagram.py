@@ -32,15 +32,15 @@ class Instagram:
         # )
         button_not_now = WebDriverWait(self._driver, 50).until(
             lambda x:
-                x.find_element_by_xpath('//button[text()="Not Now"]') or
-                x.find_element_by_xpath('//button[text()="Cancel"]')
+                x.find_element_by_xpath('//button[text()="Cancel"]') or
+                x.find_element_by_xpath('//button[text()="Not Now"]')
         )
         button_not_now.click()
 
-        cancel_not_now = WebDriverWait(self._driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, '//button[text()="Cancel"]'))
-        )
-        cancel_not_now.click()
+        # cancel_not_now = WebDriverWait(self._driver, 10).until(
+        #     EC.presence_of_element_located((By.XPATH, '//button[text()="Cancel"]'))
+        # )
+        # cancel_not_now.click()
 
     def post(self, image_path, label):
         WebDriverWait(self._driver, 10).until(
